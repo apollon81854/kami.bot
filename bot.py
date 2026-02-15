@@ -1,14 +1,23 @@
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import requests
+from flask import Flask
+import os
+import threading
 
+# ✅ ВАШ НОВЫЙ ТОКЕН
 bot = telebot.TeleBot("8046950381:AAFswiapOFK1jhaX2T47IKxQLkE63UVMcaQ")
 
 # ✅ УДАЛЯЕМ WEBHOOK
-requests.get(f"https://api.telegram.org/bot{bot.token}/deleteWebhook")
+requests.get(f"https://api.telegram.org/bot8046950381:AAFswiapOFK1jhaX2T47IKxQLkE63UVMcaQ/deleteWebhook")
 
-# ✅ URL вашего фото (замените на своё)
-PHOTO_URL = "https://photos.app.goo.gl/Rh8dsJ1N8ZWoNw2F6"  # ← ВСТАВЬТЕ ССЫЛКУ НА ФОТО
+PHOTO_URL = "https://photos.app.goo.gl/Rh8dsJ1N8ZWoNw2F6"
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "✅ Bot is alive!"
 
 @bot.message_handler(commands=['start', 'menu'])
 def send_menu(message):
@@ -22,12 +31,17 @@ def send_menu(message):
         InlineKeyboardButton("Чат", url="https://t.me/kamachatnax")
     )
     
-    # ✅ ОТПРАВЛЯЕМ ФОТО + ТЕКСТ + КНОПКИ
     bot.send_photo(
         chat_id=message.chat.id,
-        photo=PHOTO_URL,  # Ссылка на фото
-        caption="Выбери то, что интересует тебя.",  # Текст под фото
-        reply_markup=markup  # Кнопки под фото
+        photo=PHOTO_URL,
+        caption="Выбери то, что интересует тебя.",
+        reply_markup=markup
     )
 
-bot.polling()
+def run_bot():
+    bot.polling()
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 10000))
+    threading.Thread(target=run_bot, daemon=True).start()
+    app.run(host='0.0.0.0', port=port)
