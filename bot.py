@@ -1,7 +1,7 @@
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-bot = telebot.TeleBot("8411299364:AAF4mkwmXt-LHoxvWbIs2XWzGvTwq5pqg5w")
+bot = telebot.TeleBot("8592922954:AAGwp6AfDHXIqLglkNSJycw_w4K7UMZzoZw")
 
 @bot.message_handler(commands=['start', 'menu'])
 def send_menu(message):
