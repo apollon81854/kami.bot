@@ -6,7 +6,7 @@ import os
 import threading
 
 # ✅ ВАШ НОВЫЙ ТОКЕН
-bot = telebot.TeleBot("8046950381:AAFswiapOFK1jhaX2T47IKxQLkE63UVMcaQ")
+bot = telebot.TeleBot("8411299364:AAEKoMeXTumvx-TyNvIwhJspau9QIWJtNFo")
 
 # ✅ УДАЛЯЕМ WEBHOOK
 requests.get(f"https://api.telegram.org/bot8046950381:AAFswiapOFK1jhaX2T47IKxQLkE63UVMcaQ/deleteWebhook")
