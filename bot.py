@@ -2,7 +2,7 @@ import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import requests
 
-bot = telebot.TeleBot("8592922954:AAGwp6AfDHXIqLglkNSJycw_w4K7UMZzoZw")
+bot = telebot.TeleBot("8046950381:AAFswiapOFK1jhaX2T47IKxQLkE63UVMcaQ")
 
 # ✅ УДАЛЯЕМ WEBHOOK
 requests.get(f"https://api.telegram.org/bot{bot.token}/deleteWebhook")
