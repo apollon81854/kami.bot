@@ -1,7 +1,14 @@
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+import requests
 
-bot = telebot.TeleBot("8592922954:AAGwp6AfDHXIqLglkNSJycw_w4K7UMZzoZw")
+bot = telebot.TeleBot("8411299364:AAF4mkwmXt-LHoxvWbIs2XWzGvTwq5pqg5w")
+
+# ✅ УДАЛЯЕМ WEBHOOK
+requests.get(f"https://api.telegram.org/bot{bot.token}/deleteWebhook")
+
+# ✅ URL вашего фото (замените на своё)
+PHOTO_URL = "https://photos.app.goo.gl/Rh8dsJ1N8ZWoNw2F6"  # ← ВСТАВЬТЕ ССЫЛКУ НА ФОТО
 
 @bot.message_handler(commands=['start', 'menu'])
 def send_menu(message):
@@ -14,6 +21,13 @@ def send_menu(message):
         InlineKeyboardButton("Boost", url="https://t.me/boost?c=3041366792"),
         InlineKeyboardButton("Чат", url="https://t.me/kamachatnax")
     )
-    bot.send_message(message.chat.id, 'Соц.Сети Kami', reply_markup=markup)
+    
+    # ✅ ОТПРАВЛЯЕМ ФОТО + ТЕКСТ + КНОПКИ
+    bot.send_photo(
+        chat_id=message.chat.id,
+        photo=PHOTO_URL,  # Ссылка на фото
+        caption="Выбери то, что интересует тебя.",  # Текст под фото
+        reply_markup=markup  # Кнопки под фото
+    )
 
 bot.polling()
